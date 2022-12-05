@@ -146,4 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c4ee1de025823e4faa04825d9617a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixSound: {fileID: 8300000, guid: ea72b69d7ccabf847b345db9cd6cc81d, type: 3}
+  soundPrefab: {fileID: 5771736547232240786, guid: 542d6286b7271204ea8696d0fee010ee,
+    type: 3}

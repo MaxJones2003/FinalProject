@@ -7,7 +7,6 @@ public class StageController : MonoBehaviour
 {
     public static StageController inst { get; private set; }
     public int currentStage;
-    int maxStage = 2;
     public int totalRobots; //amount of robots on the current stage
     public int totalCogPickups; //amount of ammo pickups on the stage
     public bool winState = false;

@@ -370,6 +370,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/Scripts/Bridge.cs"
 "Assets/Scripts/CogPickup.cs"
 "Assets/Scripts/DamageZone.cs"
 "Assets/Scripts/EnemyController.cs"
@@ -379,8 +380,11 @@
 "Assets/Scripts/NPC.cs"
 "Assets/Scripts/Projectile.cs"
 "Assets/Scripts/RubyController.cs"
+"Assets/Scripts/SoundEffect.cs"
 "Assets/Scripts/StageController.cs"
+"Assets/Scripts/Tree.cs"
 "Assets/Scripts/UIHealthBar.cs"
+"Assets/Scripts/WoodPickup.cs"
 -langversion:9.0
 
 /deterministic

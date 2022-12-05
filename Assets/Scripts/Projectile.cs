@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     Rigidbody2D rb;
-    
+    public GameObject soundPrefab;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,13 +27,23 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        
         EnemyController e = other.collider.GetComponent<EnemyController>();
+        Tree t = other.collider.GetComponent<Tree>();
+        GameObject sound = Instantiate(soundPrefab);
         if (e != null)
         {
             Destroy(gameObject);
             e.Fix();
             FixedCounter.instance.FixedUI(); //calls the FixedCounter script to keep track of how many robots have been fixed
         }
-        Destroy(gameObject);
+        
+        else if(t != null)
+        {           
+            t.Break();
+            Destroy(gameObject);
+        }
+
+        else Destroy(gameObject);
     }
 }

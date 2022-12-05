@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8075563034536895739}
   - component: {fileID: 8834455268784835121}
   - component: {fileID: 4395773988483994061}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CollectibleHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,4 +124,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9bfb355588ff14994ebce7fd5fa968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectedClip: {fileID: 8300000, guid: 37dbf909a9fb08f48b3770af86efdfea, type: 3}

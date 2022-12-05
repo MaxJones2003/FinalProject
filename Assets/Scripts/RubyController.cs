@@ -26,6 +26,9 @@ public class RubyController : MonoBehaviour
     public TextMeshProUGUI ammoCount;
     int pickedUpCogs;
 
+    public TextMeshProUGUI woodCount;
+    public int wood;
+
     bool isInvincible;
     float invincibleTimer;
 
@@ -61,6 +64,8 @@ public class RubyController : MonoBehaviour
         startAmmo = 10;
         ammo = startAmmo;
         ammoCount.text = ammo.ToString();
+
+        woodCount.text = "Wood: " + wood.ToString();
 
         currentHealth = maxHealth;
 
@@ -116,14 +121,28 @@ public class RubyController : MonoBehaviour
                 NPC character = hit.collider.GetComponent<NPC>();
                 if (character != null)
                 {
-
                     character.DisplayDialog();
+                    if (FixedCounter.instance.fixedCount == FixedCounter.instance.totalCount)
+                    {
+                        spokeToJambi = true;
+                        StageController.inst.currentStage++;
+                        StageController.inst.StageSelect();
+                    }
                 }
-                if (FixedCounter.instance.fixedCount == FixedCounter.instance.totalCount)
+            }
+            
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            RaycastHit2D hitBridge = Physics2D.Raycast(rb.position + Vector2.left * 0.2f, lookDirection, 1.5f, LayerMask.GetMask("Bridge"));
+            if (hitBridge.collider != null)
+            {     
+                Bridge bridge = hitBridge.collider.GetComponent<Bridge>();
+                if (bridge != null && wood >= 10 && !bridge.isFixed)
                 {
-                    spokeToJambi = true;
-                    StageController.inst.currentStage++;
-                    StageController.inst.StageSelect();
+                    Debug.Log("It worked");
+                    bridge.FixBridge();
                 }
             }
         }
@@ -133,7 +152,7 @@ public class RubyController : MonoBehaviour
             Application.Quit();
         }
 
-        if (ammo <= 0 || currentHealth <= 0 && !loseCondition) //sets game to lose state
+        if (ammo + pickedUpCogs + StageController.inst.totalCogPickups <= 0 || currentHealth <= 0 && !loseCondition) //sets game to lose state
         {
             loseCondition = true;
             End();
@@ -222,15 +241,21 @@ public class RubyController : MonoBehaviour
         ammoCount.text = ammo.ToString();
         if (change > 0)
         {
-            pickedUpCogs--;
+            pickedUpCogs = pickedUpCogs - change;
         }
+    }
+
+    public void WoodAmount(int change)
+    {
+        wood = wood + change;
+        woodCount.text = "Wood: "+ wood.ToString();
+
     }
 
     public void PlaySound(AudioClip clip)
     {
         audioSource.PlayOneShot(clip);
     }
-
 
     public void End()
     {
@@ -242,17 +267,9 @@ public class RubyController : MonoBehaviour
             {
                 endText.text = "Oh no! You died. Press 'R' to restart";
             }
-            else if (ammo <= 0)
+            else if (ammo + pickedUpCogs + StageController.inst.totalCogPickups <= 0)
             {
-                if (pickedUpCogs + StageController.inst.totalCogPickups > 0)
-                {
-                    endText.text = "Oh no! You don't have enough cogs to fix the robots. Make sure to pick up extra cogs lying around. Press 'R' to restart";
-                }
-                else
-                {
-                    endText.text = "Oh no! You don't have enough cogs to fix the robots. Press 'R' to restart";
-                }
-
+                endText.text = "Oh no! You don't have enough cogs to fix the robots. Press 'R' to restart";          
             }
         }
 
